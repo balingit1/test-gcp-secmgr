@@ -26,9 +26,7 @@ jobs:
             var1:kubernetes-test-197900/foo
 
       - name: 'query'
-        env: 
-          SEC: '${{ steps.secrets.outputs.var1 }}'
-        run: echo $SEC
+        run: echo '${{ steps.secrets.outputs.var1 }}'
        
   
       
