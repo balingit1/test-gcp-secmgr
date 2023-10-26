@@ -27,6 +27,9 @@ jobs:
 
       - name: 'query'
         run: echo '${{ steps.secrets.outputs.var1 }}'
+
+      - name: 'query2'
+        run: echo '${{ secrets.WIF_PROVIDER }}'
        
   
       
