@@ -13,7 +13,7 @@ jobs:
       id-token: 'write'
 
     steps:
-      - name: 'auth'
+      - id: 'auth'
         uses: 'google-github-actions/auth@v1'
         with:
           workload_identity_provider: '${{ secrets.WIF_PROVIDER }}'
@@ -23,16 +23,7 @@ jobs:
         uses: 'google-github-actions/get-secretmanager-secrets@v1'
         with:
           secrets: |-
-            var1:kubernetes-test-197900/foo
+            token:kubernetes-test-197900/foo
 
-      - name: 'query'
-        run: echo '${{ steps.secrets.outputs.var1 }}'
-
-      - name: 'query2'
-        run: echo '${{ secrets.WIF_PROVIDER }}'
-       
-  
-      
-
-  
-   
+      - id: 'query'
+        run: echo '${{ steps.secrets.outputs.token }}'
