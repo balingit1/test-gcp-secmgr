@@ -1,0 +1,37 @@
+name: Test GCP Sec Mgr
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  job_id:
+    name: 'get secrets'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: '${{ secrets.WIF_PROVIDER }}'
+          service_account: '${{ secrets.WIF_SERVICE_ACCOUNT }}'
+  
+      - id: 'secrets'
+        uses: 'google-github-actions/get-secretmanager-secrets@v1'
+        with:
+          secrets: |-
+            var1:kubernetes-test-197900/foo
+
+      - name: 'query'
+        env: 
+          SEC: '${{ steps.secrets.outputs.var1 }}'
+        run: echo $SEC
+       
+  
+      
+
+  
+   
