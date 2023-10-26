@@ -26,4 +26,5 @@ jobs:
             token:kubernetes-test-197900/foo
 
       - id: 'query'
-        run: echo '${{ steps.secrets.outputs.token }}'
+        run: |
+          echo '${{ steps.secrets.outputs.token }}'
